@@ -4,6 +4,8 @@ class UserCategory < ApplicationRecord
 
   acts_as_paranoid column: :destroyed_at
 
+  has_one_attached :background, dependent: :destroy
+
   default_scope { order(:name) }
 
   # Callbacks

@@ -85,6 +85,11 @@
 <!--Main layout-->
 <main style="margin-top: 58px;">
   <div class="container pt-4">
+    <% if notice %>
+      <p class="alert alert-success text-center mb-3"><%= notice %></p>
+    <% elsif alert %>
+      <p class="alert alert-danger text-center mb-3"><%= alert %></p>
+    <% end %>
     <%= yield %>
   </div>
 </main>

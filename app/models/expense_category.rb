@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Model to store all the categories of expenses.
 class ExpenseCategory < ApplicationRecord
   extend FriendlyId
   friendly_id :generated_slug, use: :slugged

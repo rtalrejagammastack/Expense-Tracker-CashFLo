@@ -1,15 +1,13 @@
-<%= render partial: 'shared/heading', locals: { heading: @user_category.name } %>
+<%= render partial: 'shared/heading', locals: { heading: " #{ @user_category.name } Category " } %>
 
-<%= render partial: 'shared/heading', locals: { heading: 'Listing Expense Categories' } %>
-
-<%= link_to "New Expense Category", new_user_category_expense_category_path(@user_category), class: "btn btn-primary btn-lg btn-rounded shadow mb-4" %>
+<%= link_to "New Expense Category", new_user_category_expense_category_path(@user_category), class: "btn btn-primary btn-lg shadow mb-4" %>
 <div class="table-responsive">
-  <table class="table align-middle mb-3 bg-white table-hover">
+  <table class="table align-middle text-center mb-3 bg-white table-hover">
     <thead class="table-dark">
       <tr>
-        <th class="text-center">Category Name</th>
-        <th class="text-center">Sub-Categories</th>
-        <th class="text-center">Actions</th>
+        <th>Category Name</th>
+        <th>Sub-Categories</th>
+        <th colspan="3" >Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -18,15 +16,19 @@
           <td>
             <p class="fw-normal mb-1"> <%= expense_category.name %> </p>
           </td>
-          <td></td>
+          <td>
+            <p class="fw-normal mb-1"> <%= @expense_sub_categories[expense_category.id] %> </p>
+          </td>
           <td>
             <%= link_to "Show Sub Categories", user_category_expense_category_path(@user_category,expense_category), class:"btn btn-link btn-sm fw-boldy" %>  
-            <% if expense_category.user_category %>
-              <%= link_to "Edit Category", edit_user_category_expense_category_path(@user_category,expense_category), class:"btn btn-link btn-sm fw-boldy" %>
-              <%= link_to "Delete Category", user_category_expense_category_path(@user_category,expense_category), class: "btn btn-link btn-sm fw-boldy", method: :delete, data: {
-                    confirm: 'Are you sure to delete this Expense Category and all of its sub-categories?'
-                } %>
-            <% end %>
+          </td>
+          <td>
+            <%= link_to "Edit Category", edit_user_category_expense_category_path(@user_category,expense_category), class:"btn btn-link btn-sm fw-boldy" %>
+          </td>
+          <td>
+            <%= link_to "Delete Category", user_category_expense_category_path(@user_category,expense_category), class: "btn btn-link btn-sm fw-boldy text-danger", method: :delete, data: {
+                  confirm: 'Are you sure to delete this Expense Category and all of its sub-categories?'
+              } %>
           </td>
         </tr>
       <% end %>

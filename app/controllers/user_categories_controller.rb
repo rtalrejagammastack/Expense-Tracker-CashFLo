@@ -16,9 +16,9 @@ class UserCategoriesController < ApplicationController
   def create
     @user_category = current_user.categories.new(category_params)
     if @user_category.save
-      redirect_to user_category_path(@user_category), notice: 'Category successfully created.'
+      redirect_to user_category_path(@user_category), notice: 'User category was successfully created.'
     else
-      render :new, status: :unprocessable_entity, alert: 'Some issue in creating Category.Try Again...'
+      render :new, status: :unprocessable_entity, alert: 'User category was unable to create.'
     end
   end
 
@@ -30,17 +30,17 @@ class UserCategoriesController < ApplicationController
 
   def update
     if @user_category.update(category_params)
-      redirect_to user_category_path(@user_category), notice: 'Category successfully updated.'
+      redirect_to user_category_path(@user_category), notice: 'User category was successfully updated.'
     else
-      render :edit, status: :unprocessable_entity, alert: 'Some issue in updating Category. Try Again...'
+      render :edit, status: :unprocessable_entity, alert: 'User category was unable to update.'
     end
   end
 
   def destroy
     if @user_category.destroy
-      redirect_to user_categories_path, notice: 'Category Successfully Deleted.'
+      redirect_to user_categories_path, notice: 'User category was successfully deleted.'
     else
-      redirect_to @user_category, alert: 'Category Deletion Failed.'
+      redirect_to @user_category, alert: 'User category was unable to destroy.'
     end
   end
 

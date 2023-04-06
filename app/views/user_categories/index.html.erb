@@ -23,7 +23,7 @@
         <div class="card-footer bg-light px-3 d-flex justify-content-around">
           <%= link_to "Show", user_category_path(user_category), class: "card-link" %>
           <%= link_to "Edit", edit_user_category_path(user_category), class: "card-link" %>
-          <%= link_to "Delete", user_category_path(user_category), method: :delete, class: "card-link", data: {
+          <%= link_to "Delete", user_category_path(user_category), method: :delete, class: "card-link text-danger", data: {
             confirm: 'Are you sure to delete this category?'
           } %>
         </div>

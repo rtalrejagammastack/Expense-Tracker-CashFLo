@@ -8,6 +8,7 @@ class ExpenseCategoriesController < ApplicationController
 
   def index
     @expense_categories = @user_category.expense_categories
+    @expense_sub_categories = @user_category.expense_subcategories_by_expense_category_hash
   end
 
   def new
@@ -20,11 +21,12 @@ class ExpenseCategoriesController < ApplicationController
     if @expense_category.save
       redirect_to user_category_expense_category_path(@user_category, @expense_category), notice: 'Expense category was successfully created.'
     else
-      render :new, status: :unprocessable_entity, alert: 'Unable to create Expense Category. Try Again...'
+      render :new, status: :unprocessable_entity, alert: 'Expense category was unable to create.'
     end
   end
 
   def show
+    @expense_sub_categories = @expense_category.sub_categories
   end
 
   def edit
@@ -34,7 +36,7 @@ class ExpenseCategoriesController < ApplicationController
     if @expense_category.update(expense_category_params)
       redirect_to user_category_expense_category_path(@user_category, @expense_category), notice: 'Expense category was successfully updated.'
     else
-      render :edit, status: :unprocessable_entity, alert: 'Unable to update Expense Category. Try Again...'
+      render :edit, status: :unprocessable_entity, alert: 'Expense category was unable to update.'
     end
   end
 
@@ -42,7 +44,7 @@ class ExpenseCategoriesController < ApplicationController
     if @expense_category.destroy
       redirect_to user_category_expense_categories_path(@user_category), notice: 'Expense category was successfully destroyed.'
     else
-      redirect_to user_category_expense_categories_path(@user_category), notice: 'Unable to destroy the Expense category. Try Again....'
+      redirect_to user_category_expense_categories_path(@user_category), notice: 'Expense category was unable to destroy.'
     end
   end
 
@@ -53,10 +55,10 @@ class ExpenseCategoriesController < ApplicationController
   end
 
   def find_user_category
-    @user_category = UserCategory.friendly.find_by_slug(params[:user_category_slug])
+    @user_category = UserCategory.friendly.find(params[:user_category_slug])
   end
 
   def find_expense_category
-    @expense_category = ExpenseCategory.friendly.find_by_slug(params[:slug])
+    @expense_category = ExpenseCategory.friendly.find(params[:slug])
   end
 end

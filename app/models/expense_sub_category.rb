@@ -1,4 +1,10 @@
+# frozen_string_literal: true
+
+# Model to store all the sub-categories of any expense category.
 class ExpenseSubCategory < ApplicationRecord
+  extend FriendlyId
+  friendly_id :generated_slug, use: :slugged
+
   acts_as_paranoid column: :destroyed_at
 
   default_scope { order(:name) }
@@ -12,5 +18,5 @@ class ExpenseSubCategory < ApplicationRecord
   # Associations
   belongs_to :category, class_name: 'ExpenseCategory'
   belongs_to :user_category, optional: true
-  has_many :transactions, dependent: :destroy
+  has_many :transactions
 end

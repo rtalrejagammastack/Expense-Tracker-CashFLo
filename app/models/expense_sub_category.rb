@@ -1,7 +1,4 @@
-class UserCategory < ApplicationRecord
-  extend FriendlyId
-  friendly_id :generated_slug, use: :slugged
-
+class ExpenseSubCategory < ApplicationRecord
   acts_as_paranoid column: :destroyed_at
 
   default_scope { order(:name) }
@@ -13,8 +10,7 @@ class UserCategory < ApplicationRecord
   validates :name, presence: true
 
   # Associations
-  belongs_to :user
-  has_many :expense_categories, dependent: :destroy
-  has_many :expense_sub_categories, through: :expense_categories
+  belongs_to :category, class_name: 'ExpenseCategory'
+  belongs_to :user_category, optional: true
   has_many :transactions, dependent: :destroy
 end

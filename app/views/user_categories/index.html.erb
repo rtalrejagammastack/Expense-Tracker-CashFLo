@@ -1,0 +1,25 @@
+<%= render partial: 'shared/heading', locals: { heading: 'User Categories' } %>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <% @user_categories.each do |user_category| %>
+    <div class="col">
+      <div class="card border border-dark mb-3">
+        <div class="card-header">
+          <%= user_category.name %>
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-light list-group-small">
+            <li class="list-group-item px-4">  </li>
+          </ul>
+        </div>
+        <div class="card-footer bg-light px-3 d-flex justify-content-around">
+          <%= link_to "Show", user_category_path(user_category), class: "card-link" %>
+          <%= link_to "Edit", edit_user_category_path(user_category), class: "card-link" %>
+          <%= link_to "Delete", user_category_path(user_category), method: :delete, class: "card-link", data: {
+            confirm: 'Are you sure to delete this category?'
+          } %>
+        </div>
+      </div>  
+    </div>
+  <% end %>
+</div>

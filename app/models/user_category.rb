@@ -1,4 +1,6 @@
 class UserCategory < ApplicationRecord
+  extend FriendlyId
+  friendly_id :generated_slug, use: :slugged
   # Callbacks
   before_save :capital_first_letter
 

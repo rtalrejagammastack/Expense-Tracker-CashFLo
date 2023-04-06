@@ -51,6 +51,6 @@ class UserCategoriesController < ApplicationController
   end
 
   def find_user_category
-    @user_category = UserCategory.find(params[:id])
+    @user_category = UserCategory.friendly.find(params[:slug])
   end
 end

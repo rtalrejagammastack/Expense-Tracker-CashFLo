@@ -1,0 +1,27 @@
+<%= render partial: 'shared/heading', locals: { heading: "#{ action_name.capitalize } #{ expense_category.name.nil? ? "Expense" : expense_category.name } Category For #{ user_category.name } Category" } %>
+
+<%= form_with model: [user_category, expense_category] do |form| %>
+
+  <% if expense_category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@expense_category.errors.count, "error") %> prohibited this expense category from being saved:</h2>
+      <ul>
+        <% @expense_category.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-md-4 mb-4">
+      <div class="form-outline">
+        <%= form.text_field :name, autofocus: true, class: "form-control form-control-lg" %>
+        <%= form.label :name, class:"form-label" %>
+      </div>
+    </div>
+  </div>
+
+  <%= form.submit class: "btn btn-success" %>
+  <%= link_to "Cancel", user_category_expense_categories_path(@user_category), class: 'btn btn-danger' %>
+<% end %>

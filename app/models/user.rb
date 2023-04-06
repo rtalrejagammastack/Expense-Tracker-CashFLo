@@ -7,6 +7,8 @@ class User < ApplicationRecord
 
   acts_as_paranoid column: :destroyed_at
 
+  has_one_attached :avatar, dependent: :destroy
+
   validates :name, presence: true
   validates :phone_number, presence: true, length: { is: 10, message: 'must have 10 digit.' }
 

@@ -1,0 +1,70 @@
+<div class="table-responsive">
+  <table class="table align-middle mb-3 bg-white table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>Type</th>
+        <th>Amount</th>
+        <th>Payee/Payer Name</th>
+        <th>Expense Category</th>
+        <th>Status</th>
+        <th>Mode</th>
+        <th>Time</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% transactions.each do |date,transactions| %>
+        <tr>
+          <td colspan="9" class="text-primary text-center"> <strong> <%= date %> </strong> </td>
+        </tr>
+        <% transactions.each do |transaction| %>
+          <tr>
+            <td>
+              <p class="fw-normal mb-1"> <%= transaction.type.name  %> </p>
+            </td>
+            <td>
+              <p class="fw-bold mb-1"> <%= transaction.amount %> </p>
+            </td>
+            <td>
+              <% if transaction.type.name == "Income" %>
+                <p class="fw-normal mb-1"> Payer: <%= transaction.payer_name.blank? ? '_' : transaction.payer_name %> </p>
+              <% else %>
+                <p class="fw-normal mb-1"> Payee: <%= transaction.payee_name.blank? ? '_' : transaction.payee_name %> </p>
+              <% end %>
+            </td>
+            <td>
+              <p class="fw-normal mb-1"> <%= transaction.expense_sub_category.category.name %> </p>
+              <p class="text-muted mb-0"> <%= transaction.expense_sub_category.name %> </p>
+            </td>
+            <td>
+              <% if transaction.status.name == "Complete" %>
+                <span class="badge badge-success rounded-pill d-inline"> <%= transaction.status.name %> </span>
+              <% elsif transaction.status.name=="Pending" %>
+                <span class="badge badge-warning rounded-pill d-inline"> <%= transaction.status.name %> </span>
+              <% else  %>
+                <span class="badge badge-primary rounded-pill d-inline">Incomplete</span>
+              <% end %>
+            </td>
+            <td>
+              <p class="fw-normal mb-1"> <%= transaction.mode.name %> </p>
+            </td>
+            <td>
+              <p class="fw-normal mb-1"> <%= transaction.created_at.to_time.in_time_zone('Asia/Kolkata').strftime("%H:%M") %> </p>
+            </td>
+            <td>
+              <p class="fw-normal mb-1"> <%= transaction.description.blank? ? "_" : transaction.description  %> </p>
+            </td>
+            <td>
+              <%= link_to "Show", user_category_transaction_path(user_category, transaction), class:"btn btn-link btn-sm fw-bold" %>
+              <%= link_to "Edit", edit_user_category_transaction_path(user_category, transaction), class:"btn btn-link btn-sm fw-bold" %>
+              <%= link_to "Destroy", user_category_transaction_path(user_category, transaction), method: :delete, class:"btn btn-link btn-sm fw-bold", data: {
+                  confirm: 'Are you sure to delete this Transaction?'
+              } %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

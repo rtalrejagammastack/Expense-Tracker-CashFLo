@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_07_045052) do
+ActiveRecord::Schema.define(version: 2023_04_07_135611) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 2023_04_07_045052) do
     t.datetime "destroyed_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["destroyed_at"], name: "index_transaction_modes_on_destroyed_at"
   end
 
   create_table "transaction_statuses", force: :cascade do |t|
@@ -93,6 +94,7 @@ ActiveRecord::Schema.define(version: 2023_04_07_045052) do
     t.datetime "destroyed_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["destroyed_at"], name: "index_transaction_statuses_on_destroyed_at"
   end
 
   create_table "transaction_types", force: :cascade do |t|
@@ -100,6 +102,7 @@ ActiveRecord::Schema.define(version: 2023_04_07_045052) do
     t.datetime "destroyed_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["destroyed_at"], name: "index_transaction_types_on_destroyed_at"
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -112,14 +115,18 @@ ActiveRecord::Schema.define(version: 2023_04_07_045052) do
     t.bigint "status_id", null: false
     t.bigint "type_id", null: false
     t.bigint "mode_id", null: false
-    t.bigint "payee_id", null: false
-    t.bigint "payer_id", null: false
+    t.bigint "payee_id"
+    t.bigint "payer_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "destroyed_at"
+    t.string "slug"
+    t.index ["destroyed_at"], name: "index_transactions_on_destroyed_at"
     t.index ["expense_sub_category_id"], name: "index_transactions_on_expense_sub_category_id"
     t.index ["mode_id"], name: "index_transactions_on_mode_id"
     t.index ["payee_id"], name: "index_transactions_on_payee_id"
     t.index ["payer_id"], name: "index_transactions_on_payer_id"
+    t.index ["slug"], name: "index_transactions_on_slug", unique: true
     t.index ["status_id"], name: "index_transactions_on_status_id"
     t.index ["type_id"], name: "index_transactions_on_type_id"
     t.index ["user_category_id"], name: "index_transactions_on_user_category_id"

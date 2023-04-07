@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Model to Store User data
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -8,6 +11,11 @@ class User < ApplicationRecord
   acts_as_paranoid column: :destroyed_at
 
   has_one_attached :avatar, dependent: :destroy
+  
+  DEFAULT_CATEGORY = "FAMILY".freeze
+
+  # Callbacks
+  after_create :create_default_category
 
   validates :name, presence: true
   validates :phone_number, presence: true, length: { is: 10, message: 'must have 10 digit.' }
@@ -18,4 +26,9 @@ class User < ApplicationRecord
   has_many :expense_sub_categories, through: :expense_categories, source: :sub_categories
   has_many :transactions, class_name: 'Transaction', foreign_key: 'payer_id', dependent: :destroy
   has_many :receive_transactions, class_name: 'Transaction', foreign_key: 'payee_id', dependent: :destroy
+
+  def create_default_category
+    default_category = categories.create(name: DEFAULT_CATEGORY)
+    default_category.background.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'family.png')), filename: 'family.png', content_type: 'image/png')
+  end
 end

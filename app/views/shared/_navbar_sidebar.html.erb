@@ -6,7 +6,7 @@
         <div class="list-group-item list-group-item-action py-2">
             <div class="btn-group">
             <button class="btn btn-primary dropdown-toggle" type="button" data-mdb-toggle="dropdown" aria-expanded="false">
-              Categories
+              <%= t("activerecord.model.user_category.name.plural") %>
             </button>
             <ul class="dropdown-menu">
               <li>Category1</li>
@@ -30,7 +30,9 @@
       </button>
 
       <!-- Brand -->
-      <%= link_to image_tag("logo.png",height: 25,alt:"Company Logo",loading:"lazy"),root_path,class:"navbar-brand" %>
+      <%= link_to root_path do %>
+        <%= image_tag t('project.logo.file_name'), height: 25, alt:"Company Logo", loading:"lazy", class:'navbar-brand' %>
+      <% end %>
 
       <!-- Search form -->
       <form class="d-none d-md-flex input-group w-auto my-auto">
@@ -53,10 +55,10 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
             <li> 
-              <%= link_to "My Profile", edit_user_registration_path, class:'dropdown-item' %>
+              <%= link_to t("links.profile"), edit_user_registration_path, class:'dropdown-item' %>
             </li>
             <li>
-              <%= link_to "Logout",destroy_user_session_path ,class:"dropdown-item" ,method: :delete %>
+              <%= link_to t("links.sign_out"), destroy_user_session_path ,class:"dropdown-item" ,method: :delete %>
             </li>
           </ul>
         </li>

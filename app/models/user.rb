@@ -2,6 +2,7 @@
 
 # Model to Store User data
 class User < ApplicationRecord
+  include ApplicationHelper
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -29,6 +30,6 @@ class User < ApplicationRecord
 
   def create_default_category
     default_category = categories.create(name: DEFAULT_CATEGORY)
-    default_category.background.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'family.png')), filename: 'family.png', content_type: 'image/png')
+    default_category.background.attach(image_file('family.png'))
   end
 end

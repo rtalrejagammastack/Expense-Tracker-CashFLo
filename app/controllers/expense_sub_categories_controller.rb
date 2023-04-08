@@ -12,12 +12,12 @@ class ExpenseSubCategoriesController < ApplicationController
   end
 
   def create
-    @expense_sub_category = @expense_category.sub_categories.new(expense_sub_category_params)
+    expense_sub_category = @expense_category.sub_categories.new(expense_sub_category_params)
 
-    if @expense_sub_category.save
-      redirect_to user_category_expense_category_path(@user_category, @expense_category), notice: 'Expense-sub category was successfully created.'
+    if expense_sub_category.save
+      redirect_to user_category_expense_category_path(@user_category, @expense_category), notice: I18n.t('activerecord.model.expense_sub_category.create.success', name: expense_sub_category.name)
     else
-      render :new, status: :unprocessable_entity, alert: 'Expense-sub category was unable to create.'
+      render :new, status: :unprocessable_entity, alert: I18n.t('activerecord.model.expense_sub_category.create.error', name: expense_sub_category.name)
     end
   end
 
@@ -26,17 +26,17 @@ class ExpenseSubCategoriesController < ApplicationController
 
   def update
     if @expense_sub_category.update(expense_sub_category_params)
-      redirect_to user_category_expense_category_path(@user_category, @expense_category), notice: 'Expense-sub category was successfully updated.'
+      redirect_to user_category_expense_category_path(@user_category, @expense_category), notice: I18n.t('activerecord.model.expense_sub_category.update.success', name: @expense_sub_category.name)
     else
-      render :edit, status: :unprocessable_entity, alert: 'Expense-sub category was unable to update.'
+      render :edit, status: :unprocessable_entity, alert: I18n.t('activerecord.model.expense_sub_category.update.error', name: @expense_sub_category.name)
     end
   end
 
   def destroy
     if @expense_sub_category.destroy
-      redirect_to user_category_expense_category_path(@user_category, @expense_category), notice: 'Expense-sub category was successfully deleted.'
+      redirect_to user_category_expense_category_path(@user_category, @expense_category), notice: I18n.t('activerecord.model.expense_sub_category.destroy.success', name: @expense_sub_category.name)
     else
-      redirect_to user_category_expense_category_path(@user_category, @expense_category), notice: 'Expense-sub category was unable to destroy.'
+      redirect_to user_category_expense_category_path(@user_category, @expense_category), notice: I18n.t('activerecord.model.expense_sub_category.destroy.error', name: @expense_sub_category.name)
     end
   end
 

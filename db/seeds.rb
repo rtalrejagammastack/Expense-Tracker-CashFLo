@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+TransactionStatus.create([{name:"Complete"},{name:"Pending"}])
+
+TransactionType.create([{name:"Expense"},{name:"Income"}])
+
+TransactionMode.create([{name:"Cash"},{name:"Upi"},{name:"Debt Card"},{name:"Credit Card"}])

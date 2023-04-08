@@ -3,4 +3,6 @@ class TransactionStatus < ApplicationRecord
 
   # Associations
   has_many :transactions
+
+  scope :map_id_with_name, -> { map { |status| [status.name, status.id] } }
 end

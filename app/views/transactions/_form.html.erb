@@ -1,8 +1,6 @@
-<%= render partial: 'shared/heading', locals: { heading: "#{ action_name.capitalize } #{ transaction_type.name } Transaction" } %>
+<%= render partial: 'shared/heading', locals: { heading: "#{ action_name.capitalize } #{ transaction_type&.name } Transaction" } %>
 
 <%= form_with model: [user_category, transaction] do |form| %>
-
-  <%= render partial: 'shared/errors', locals: { resource: transaction } %>
 
   <div class="row"> 
     <% if transaction_type.name == "Expense" %>
@@ -35,7 +33,7 @@
 
     <div class="col-md-4 mb-4"> 
       <div class="form-outline">
-        <%= form.number_field :amount, autofocus: true, class:"form-control form-control-lg" %>
+        <%= form.number_field :amount, autofocus: true, class:"form-control form-control-lg", required:true %>
         <%= form.label :amount, class:"form-label" %>
       </div>
     </div>
@@ -49,7 +47,7 @@
 
     <div class="col-md-4 mb-4">
         <%= form.label :status_id, class:"form-label" %>
-        <%= form.select :status_id, options_for_select(@status_options), { prompt: 'Select Status' }, class:'form-control form-control-lg' %>
+        <%= form.select :status_id, options_for_select(transaction_status), { prompt: 'Select Status' }, class:'form-control form-control-lg' %>
     </div>
 
     <div class="col-md-4 mb-4">
@@ -64,7 +62,7 @@
 
     <div class="col-md-4 mb-4">
         <%= form.label :expense_category_id, class:"form-label" %>
-        <%= form.select :expense_category_id, options_for_select(expense_categories), { prompt: 'Select Expense Category' }, class:'form-control form-control-lg' %>
+        <%= form.select :expense_category_id, options_for_select(@expense_categories), { prompt: 'Select Expense Category' }, class:'form-control form-control-lg' %>
     </div>
 
     <div class="col-md-4 mb-4">

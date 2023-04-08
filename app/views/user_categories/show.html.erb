@@ -1,7 +1,6 @@
 <%= render partial: 'shared/heading', locals: { heading: " #{ @user_category.name } Category" } %>
 
 <div class="d-flex justify-content-around mb-4">
-  <%= link_to "New Transaction", new_user_category_transaction_path(@user_category), class: "btn btn-primary btn-lg shadow"  %>
   <%= link_to "Show Transactions", user_category_transactions_path(@user_category), class: "btn btn-primary btn-lg shadow"  %>
   <%= link_to "Expense Categories", user_category_expense_categories_path(@user_category), class: "btn btn-primary btn-lg shadow"  %>
   <%= link_to "Edit Category", edit_user_category_path(@user_category), class: "btn btn-primary btn-lg shadow" %>
@@ -9,3 +8,5 @@
     confirm: 'Are you sure to delete this category?'
   } %>
 </div>
+
+<%= render 'modal_transaction' %>

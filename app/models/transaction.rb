@@ -4,6 +4,8 @@ class Transaction < ApplicationRecord
 
   acts_as_paranoid column: :destroyed_at
 
+  self.per_page = 25
+
   default_scope { order(created_at: :desc) }
 
   scope :create_hash_transactions_group_by_date, -> { group_by { |transaction| transaction.created_at.to_date }.map { |date, transaction| [date, transaction] }.to_h }

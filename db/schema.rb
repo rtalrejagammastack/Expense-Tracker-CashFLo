@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_08_162433) do
+ActiveRecord::Schema.define(version: 2023_04_09_075743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,7 +74,9 @@ ActiveRecord::Schema.define(version: 2023_04_08_162433) do
     t.datetime "destroyed_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
     t.index ["destroyed_at"], name: "index_transaction_modes_on_destroyed_at"
+    t.index ["slug"], name: "index_transaction_modes_on_slug", unique: true
   end
 
   create_table "transaction_statuses", force: :cascade do |t|
@@ -82,7 +84,9 @@ ActiveRecord::Schema.define(version: 2023_04_08_162433) do
     t.datetime "destroyed_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
     t.index ["destroyed_at"], name: "index_transaction_statuses_on_destroyed_at"
+    t.index ["slug"], name: "index_transaction_statuses_on_slug", unique: true
   end
 
   create_table "transaction_types", force: :cascade do |t|
@@ -90,7 +94,9 @@ ActiveRecord::Schema.define(version: 2023_04_08_162433) do
     t.datetime "destroyed_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
     t.index ["destroyed_at"], name: "index_transaction_types_on_destroyed_at"
+    t.index ["slug"], name: "index_transaction_types_on_slug", unique: true
   end
 
   create_table "transactions", force: :cascade do |t|

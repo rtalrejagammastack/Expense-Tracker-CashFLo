@@ -6,9 +6,17 @@ class TransactionsController < ApplicationController
   before_action :find_user_category
   before_action :find_transaction, only: %i[edit update destroy show]
   before_action :fetch_transaction_form_data, only: %i[new edit]
-
+  before_action :fetch_filter_parameters, only: [:index]
+  
   def index
-    @q = @user_category.transactions.ransack(params[:q])
+    all_transactions = @user_category.transactions
+    all_transactions = all_transactions.where(type: @type) if params[:type].present?
+    all_transactions = all_transactions.where(status: @status) if params[:status].present?
+    all_transactions = all_transactions.where(mode: @mode) if params[:mode].present?
+    @types_options = TransactionType.map_slug_with_name
+    @status_options = TransactionStatus.map_slug_with_name
+    @modes_options = TransactionMode.map_slug_with_name
+    @q = all_transactions.ransack(params[:q])
     @transactions_per_page = @q.result.paginate(page: params[:page]) 
     @transactions = @transactions_per_page.create_hash_transactions_group_by_date
   end
@@ -60,6 +68,7 @@ class TransactionsController < ApplicationController
   def fetch_transaction_form_data
     @transaction_types = TransactionType.all
     @transaction_type = TransactionType.where('name=?', params[:type]).first || TransactionType.first
+    @types_options = TransactionType.map_id_with_name
     @status_options = TransactionStatus.map_id_with_name
     @modes_options = TransactionMode.map_id_with_name
     @expense_categories = @user_category.expense_categories.map_id_with_name
@@ -67,6 +76,12 @@ class TransactionsController < ApplicationController
 
   def transaction_params
     params.require(:transaction).permit(:payee_name, :payer_name, :amount, :status_id, :mode_id, :expense_sub_category_id, :description, :type_id)
+  end
+
+  def fetch_filter_parameters
+    @type = TransactionType.friendly.find(params[:type]) if params[:type].present?
+    @status = TransactionStatus.friendly.find(params[:status]) if params[:status].present?
+    @mode = TransactionMode.friendly.find(params[:mode]) if params[:mode].present?
   end
 
   def find_user_category

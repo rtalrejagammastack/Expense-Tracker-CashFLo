@@ -38,6 +38,7 @@ group :development, :test do
   gem 'will_paginate-bootstrap'
   gem 'ransack'
   gem 'sidekiq'
+  gem 'whenever', require: false
 end
 
 group :development do

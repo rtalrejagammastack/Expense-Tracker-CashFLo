@@ -37,6 +37,7 @@ group :development, :test do
   gem 'will_paginate'
   gem 'will_paginate-bootstrap'
   gem 'ransack'
+  gem 'sidekiq'
 end
 
 group :development do

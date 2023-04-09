@@ -42,7 +42,7 @@
   <div class="row"> 
     <div class="col-md-4 mb-4">
         <%= form.label :type_id, class:"form-label" %>
-        <%= form.select :type_id, options_for_select([[transaction_type.name, transaction_type.id]]), { }, class:'form-control form-control-lg', disabled: true %>
+        <%= form.select :type_id, options_for_select([[transaction_type.name, transaction_type.id]]), { }, class:'form-control form-control-lg' %>
     </div>
 
     <div class="col-md-4 mb-4">
@@ -76,6 +76,15 @@
       <div class="form-outline">
         <%= form.text_area :description, autofocus: true, class:"form-control form-control-lg" %>
         <%= form.label :description, class:"form-label" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mb-4">
+    <div class="col-md-12">
+      <div class="form-outline">
+        <%= form.label :documents, "Related Document", class: 'form-label' %>
+        <%= form.file_field :documents, multiple: true %>
       </div>
     </div>
   </div>

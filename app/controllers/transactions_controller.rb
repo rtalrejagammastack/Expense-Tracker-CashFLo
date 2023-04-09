@@ -6,17 +6,14 @@ class TransactionsController < ApplicationController
   before_action :find_user_category
   before_action :find_transaction, only: %i[edit update destroy show]
   before_action :fetch_transaction_form_data, only: %i[new edit]
-  before_action :fetch_filter_parameters, only: [:index]
   
   def index
-    all_transactions = @user_category.transactions
-    all_transactions = all_transactions.where(type: @type) if params[:type].present?
-    all_transactions = all_transactions.where(status: @status) if params[:status].present?
-    all_transactions = all_transactions.where(mode: @mode) if params[:mode].present?
+    @all_transactions = @user_category.transactions
+    fetch_filter_parameters
     @types_options = TransactionType.map_slug_with_name
     @status_options = TransactionStatus.map_slug_with_name
     @modes_options = TransactionMode.map_slug_with_name
-    @q = all_transactions.ransack(params[:q])
+    @q = @all_transactions.ransack(params[:q])
     @transactions_per_page = @q.result.paginate(page: params[:page]) 
     @transactions = @transactions_per_page.create_hash_transactions_group_by_date
   end
@@ -28,7 +25,7 @@ class TransactionsController < ApplicationController
   def create
     @transaction = @user_category.transactions.new(transaction_params)
 
-    if @transaction.save
+    if @transaction.save!
       redirect_to user_category_transaction_path(@user_category, @transaction), notice: 'Transaction was successfully created.'
     else
       render :new, status: :unprocessable_entity, alert: 'Transaction was unable to create.'
@@ -75,13 +72,16 @@ class TransactionsController < ApplicationController
   end
 
   def transaction_params
-    params.require(:transaction).permit(:payee_name, :payer_name, :amount, :status_id, :mode_id, :expense_sub_category_id, :description, :type_id)
+    params.require(:transaction).permit(:payee_name, :payer_name, :amount, :status_id, :mode_id, :expense_sub_category_id, :description, :type_id, documents: [])
   end
 
   def fetch_filter_parameters
     @type = TransactionType.friendly.find(params[:type]) if params[:type].present?
     @status = TransactionStatus.friendly.find(params[:status]) if params[:status].present?
     @mode = TransactionMode.friendly.find(params[:mode]) if params[:mode].present?
+    @all_transactions = @all_transactions.where(type: @type) if params[:type].present?
+    @all_transactions = @all_transactions.where(status: @status) if params[:status].present?
+    @all_transactions = @all_transactions.where(mode: @mode) if params[:mode].present?
   end
 
   def find_user_category

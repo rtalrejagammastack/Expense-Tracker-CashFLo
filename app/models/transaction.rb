@@ -8,6 +8,8 @@ class Transaction < ApplicationRecord
 
   default_scope { order(created_at: :desc) }
 
+  has_many_attached :documents, dependent: :destroy
+
   scope :create_hash_transactions_group_by_date, -> { group_by { |transaction| transaction.created_at.to_date }.map { |date, transaction| [date, transaction] }.to_h }
 
   # Validations

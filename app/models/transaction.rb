@@ -21,4 +21,12 @@ class Transaction < ApplicationRecord
   belongs_to :mode, class_name: 'TransactionMode'
   belongs_to :payee, class_name: 'User', optional: true
   belongs_to :payer, class_name: 'User', optional: true
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["amount", "created_at", "description", "destroyed_at", "expense_sub_category_id", "id", "mode_id", "payee_id", "payee_name", "payer_id", "payer_name", "slug", "status_id", "type_id", "updated_at", "user_category_id"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["payee", "payer"]
+  end 
 end

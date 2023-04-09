@@ -36,6 +36,7 @@ group :development, :test do
   gem 'paranoia'
   gem 'will_paginate'
   gem 'will_paginate-bootstrap'
+  gem 'ransack'
 end
 
 group :development do

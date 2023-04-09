@@ -1,1 +1,4 @@
 <h1>Home</h1>
+
+
+<%= line_chart Transaction.group_by_month(:created_at).group(:id).sum(:amount) %>

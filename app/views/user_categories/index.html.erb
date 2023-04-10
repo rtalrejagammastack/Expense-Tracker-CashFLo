@@ -4,6 +4,14 @@
   <% @user_categories.each do |user_category| %>
     <div class="col">
       <div class="card border border-dark mb-3">
+        <div class="bg-image hover-overlay ripple text-center" data-mdb-ripple-color="light">
+          <% if user_category.background.attached? %>
+            <%= image_tag user_category.background, class: 'img-fluid' %>
+            <%= link_to user_category_path(user_category) do %>
+              <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+            <% end %>
+          <% end %>
+        </div>
         <div class="card-header">
           <%= user_category.name %>
         </div>
@@ -15,7 +23,7 @@
         <div class="card-footer bg-light px-3 d-flex justify-content-around">
           <%= link_to "Show", user_category_path(user_category), class: "card-link" %>
           <%= link_to "Edit", edit_user_category_path(user_category), class: "card-link" %>
-          <%= link_to "Delete", user_category_path(user_category), method: :delete, class: "card-link", data: {
+          <%= link_to "Delete", user_category_path(user_category), method: :delete, class: "card-link text-danger", data: {
             confirm: 'Are you sure to delete this category?'
           } %>
         </div>

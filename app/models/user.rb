@@ -6,7 +6,7 @@ class User < ApplicationRecord
          :confirmable
 
   validates :name, presence: true
-  validates :phone_number, presence: true, length: { is: 10, message: 'must have 10 digit.' }
+  validates :phone_number, presence: true, length: { is: 10, message: I18n.t('activerecord.model.user.attributes.phone_number') }
 
   has_many :categories, class_name: 'UserCategory', foreign_key: 'user_id'
 end

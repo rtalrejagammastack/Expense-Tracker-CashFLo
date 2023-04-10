@@ -1,0 +1,18 @@
+<%= render partial: 'shared/heading', locals: { heading: "#{ action_name.capitalize } #{ @expense_category.name.nil? ? "Expense" : @expense_category.name } Category For #{ @user_category.name } Category" } %>
+
+<%= form_with model: [@user_category, @expense_category] do |form| %>
+
+  <%= render partial: 'shared/errors', locals: { resource: @expense_category } %>
+
+  <div class="row">
+    <div class="col-md-4 mb-4">
+      <div class="form-outline">
+        <%= form.text_field :name, autofocus: true, class: "form-control form-control-lg" %>
+        <%= form.label :name, class:"form-label" %>
+      </div>
+    </div>
+  </div>
+
+  <%= form.submit class: "btn btn-success shadow btn-lg" %>
+  <%= link_to "Cancel", user_category_expense_categories_path(@user_category), class: 'btn btn-danger shadow btn-lg' %>
+<% end %>

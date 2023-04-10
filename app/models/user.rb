@@ -31,4 +31,10 @@ class User < ApplicationRecord
     default_category = categories.create(name: DEFAULT_CATEGORY)
     default_category.background.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'family.png')), filename: 'family.png', content_type: 'image/png')
   end
+  def self.ransackable_attributes(auth_object = nil)
+    ["name"]
+  end
+  def self.ransackable_associations(auth_object = nil)
+    ["receive_transactions", "transactions"]
+  end
 end

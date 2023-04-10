@@ -1,5 +1,17 @@
 <%= render partial: 'shared/heading', locals: { heading: 'All Transactions' } %>
 
+<%= search_form_for @q, url: user_category_transactions_path(@user_category) do |f| %>
+  <%= f.label :payee_name_or_payer_name_description_cont %>
+  <%= f.search_field :description_or_payee_name_or_payer_name_cont %>
+  <%= f.submit %>
+<% end %>
+<br/>
+
+<%= sort_link(@q, :amount, 'Sort By Amount', default_order: :desc) %>
+
+<br/>
+<br/>
+
 <%= render partial: 'transactions', locals: { transactions: @transactions, user_category: @user_category } %>
 
 <%= will_paginate @transactions_per_page, renderer: BootstrapPagination::Rails %>

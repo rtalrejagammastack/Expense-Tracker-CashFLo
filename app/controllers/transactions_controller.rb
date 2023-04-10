@@ -8,7 +8,8 @@ class TransactionsController < ApplicationController
   before_action :fetch_transaction_form_data, only: %i[new edit]
 
   def index
-    @transactions = @user_category.transactions.create_hash_transactions_group_by_date
+    @transactions_per_page = @user_category.transactions.paginate(page: params[:page]) 
+    @transactions = @transactions_per_page.create_hash_transactions_group_by_date
   end
 
   def new

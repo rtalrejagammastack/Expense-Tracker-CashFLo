@@ -5,5 +5,5 @@ Rails.application.routes.draw do
     get 'users', to: 'devise/registrations#new'
   end
   resources :home, only: [:index]
-  resources :user_categories
+  resources :user_categories, param: :slug
 end

@@ -4,4 +4,8 @@ class ApplicationRecord < ActiveRecord::Base
   def capital_first_letter
     self.name = name&.capitalize
   end
+
+  def generated_slug
+    @random_slug ||= persisted? ? friendly_id : SecureRandom.hex(8)
+  end
 end

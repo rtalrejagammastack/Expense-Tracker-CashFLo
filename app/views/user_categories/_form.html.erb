@@ -1,7 +1,26 @@
-<%= form_with model: user_category do |form| %>
-  <div class="form-outline mb-4 w-25">
-      <%= form.text_field :name, class:'form-control form-control-lg' %>
-      <%= form.label :name, class: 'form-label' %>
+<%= render partial: 'shared/heading', locals: { heading: "#{ action_name.capitalize } #{ user_category.name.nil? ? "User" : user_category.name } Category" } %>
+
+<%= form_with model: [user_category] do |form| %>
+
+  <%= render partial: 'shared/errors', locals: { resource: user_category } %>
+
+  <div class="row">
+    <div class="col-md-4 mb-4">
+      <div class="form-outline">
+        <%= form.text_field :name, autofocus: true, class: "form-control form-control-lg" %>
+        <%= form.label :name, class:"form-label" %>
+      </div>
+    </div>
   </div>
-  <%= form.submit class: "btn btn-primary btn-rounded shadow btn-lg" %>
+  <div class="row">
+    <div class="col-md-4 mb-4">
+      <div class="form-outline">
+        <%= form.label :background, "Background Image", class: 'form-label' %>
+        <%= form.file_field :background %>
+      </div>
+    </div>
+  </div>
+
+  <%= form.submit class: "btn btn-success btn-lg shadow" %>
+  <%= link_to "Cancel", user_categories_path, class: 'btn btn-danger btn-lg shadow' %>
 <% end %>

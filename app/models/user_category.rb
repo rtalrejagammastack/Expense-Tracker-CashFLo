@@ -4,6 +4,8 @@ class UserCategory < ApplicationRecord
 
   acts_as_paranoid column: :destroyed_at
 
+  has_one_attached :background, dependent: :destroy
+
   default_scope { order(:name) }
 
   # Callbacks
@@ -15,6 +17,14 @@ class UserCategory < ApplicationRecord
   # Associations
   belongs_to :user
   has_many :expense_categories, dependent: :destroy
-  has_many :expense_sub_categories, through: :expense_categories
-  has_many :transactions, dependent: :destroy
+  has_many :expense_sub_categories, through: :expense_categories, source: :sub_categories
+  has_many :transactions
+
+  def expense_subcategories_by_expense_category_hash
+    subcategories_by_expense_category = {}
+    expense_sub_categories.group_by(&:category).map do |key,value|
+      subcategories_by_expense_category[key.id] = value.pluck(:name).join(', ')
+    end
+    return subcategories_by_expense_category
+  end
 end

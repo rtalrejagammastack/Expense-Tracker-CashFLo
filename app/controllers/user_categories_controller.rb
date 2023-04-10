@@ -47,7 +47,7 @@ class UserCategoriesController < ApplicationController
   private
 
   def category_params
-    params.require(:user_category).permit(:name)
+    params.require(:user_category).permit(:name, :background)
   end
 
   def find_user_category

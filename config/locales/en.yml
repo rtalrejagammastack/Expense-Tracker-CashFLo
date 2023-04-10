@@ -20,7 +20,7 @@ en:
           singular: User Category
           plural: User Categories
         attributes:
-          name:
+          name: 
         create:
           success: '%{name} Category successfully created.'
           error: 'Some issue in creating %{name} Category.Try Again...'
@@ -30,6 +30,26 @@ en:
         destroy:
           success: '%{name} Category Successfully Deleted.'
           error: 'Some issue in deleting %{name} Category. Try Again...'
+      expense_category:
+        create:
+          success: '%{name} Expense Category successfully created.'
+          error: 'Some issue in creating %{name} Expense Category.Try Again...'
+        update:
+          success: '%{name} Expense Category successfully updated.'
+          error: Some issue in updating %{name} Expense Category. Try Again...'
+        destroy:
+          success: '%{name} Expense Category Successfully Deleted.'
+          error: 'Some issue in deleting %{name} Expense Category. Try Again...'
+      expense_sub_category:
+        create:
+          success: '%{name} Expense-Sub Category successfully created.'
+          error: 'Some issue in creating %{name} Expense-Sub Category.Try Again...'
+        update:
+          success: '%{name} Expense-Sub Category successfully updated.'
+          error: Some issue in updating %{name} Expense-Sub Category. Try Again...'
+        destroy:
+          success: '%{name} Expense-Sub Category Successfully Deleted.'
+          error: 'Some issue in deleting %{name} Expense-Sub Category. Try Again...'
   links:
     terms: Terms of use.
     privacy: Privacy policy

@@ -61,7 +61,11 @@
         <!-- Avatar -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (31).webp" class="rounded-circle" height="22" alt="Avatar" loading="lazy" />
+            <% if current_user.avatar.attached? %>
+              <%= image_tag current_user.avatar, class:'rounded-circle', height:'22', alt:'Avatar', loading:'lazy' %>
+            <% else %>
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (31).webp" class="rounded-circle" height="22" alt="Avatar" loading="lazy" />
+            <% end %>
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
             <li> 
@@ -83,6 +87,11 @@
 <!--Main layout-->
 <main style="margin-top: 58px;">
   <div class="container pt-4">
+    <% if notice %>
+      <p class="alert alert-success text-center mb-3"><%= notice %></p>
+    <% elsif alert %>
+      <p class="alert alert-danger text-center mb-3"><%= alert %></p>
+    <% end %>
     <%= yield %>
   </div>
 </main>

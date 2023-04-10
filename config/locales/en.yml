@@ -30,5 +30,28 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  project:
+    name: CashFlo
+    logo:
+      file_name: logo.png
   activerecord:
     error: Record not found
+    model:
+      user:
+        attributes:
+          phone_number: must have 10 digit.
+        sign_up:
+          text: Sign Up with new account
+          button: Sign Up
+        sign_in:
+          text: Sign into your account
+          button: Login
+      user_category:
+        name: 
+          singular: User Category
+          plural: User Categories
+  links:
+    terms: Terms of use.
+    privacy: Privacy policy
+    profile: My Profile
+    sign_out: logout

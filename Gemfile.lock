@@ -89,9 +89,6 @@ GEM
       responders
       warden (~> 1.2.3)
     erubi (1.12.0)
-    faker (3.1.1)
-      i18n (>= 1.8.11, < 2)
-    ffi (1.15.5)
     ffi (1.15.5-x64-mingw32)
     friendly_id (5.5.0)
       activerecord (>= 4.0.0)
@@ -272,17 +269,12 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   capybara (>= 3.26)
-  devise
-  faker
-  friendly_id
   jbuilder (~> 2.7)
   paranoia
   pg (~> 1.1)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.7, >= 6.1.7.3)
-  ransack
-  rubocop
   sass-rails (>= 6)
   selenium-webdriver (>= 4.0.0.rc1)
   turbolinks (~> 5)
@@ -294,7 +286,7 @@ DEPENDENCIES
   will_paginate-bootstrap
 
 RUBY VERSION
-   ruby 3.0.5p211
+   ruby 3.0.0p0
 
 BUNDLED WITH
    2.4.7

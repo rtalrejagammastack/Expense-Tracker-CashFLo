@@ -31,7 +31,7 @@ development:
   # the same name as the operating system user running Rails.
   username: <%= Rails.application.credentials.dig(:development, :database, :user_name) %>
   password: <%= Rails.application.credentials.dig(:development, :database, :password) %>
-  host: localhost
+  host: <%= Rails.application.credentials.dig(:development, :database, :host) %>
   port: 5432
 
   # The password associated with the postgres role (username).
@@ -61,7 +61,7 @@ test:
 
   username: <%= Rails.application.credentials.dig(:test, :database, :user_name) %>
   password: <%= Rails.application.credentials.dig(:test, :database, :password) %>
-  host: localhost
+  host: <%= Rails.application.credentials.dig(:test, :database, :host) %>
   port: 5432
 
 # As with config/credentials.yml, you never want to store sensitive information,

@@ -1,0 +1,29 @@
+<%= render partial: 'shared/heading', locals: { heading: "#{ @expense_category.name } Sub Categories " } %>
+
+<%= link_to "New Expense Sub Category", new_user_category_expense_category_expense_sub_category_path(@user_category,@expense_category), class:"btn btn-primary shadow btn-lg mb-4" %>
+
+<div class="table-responsive">
+  <table class="table align-middle text-center mb-3 bg-white table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @expense_sub_categories.each do |sub_category| %>
+        <tr>
+          <td>
+            <p class="fw-normal mb-1"> <%= sub_category.name %> </p>
+          </td>
+          <td>
+            <%= link_to "Edit",edit_user_category_expense_category_expense_sub_category_path(@user_category,@expense_category,sub_category),class:"btn btn-link btn-sm fw-boldy" %>
+            <%= link_to "Delete",user_category_expense_category_expense_sub_category_path(@user_category,@expense_category,sub_category), method: :delete,class:"btn btn-link btn-sm fw-boldy text-danger", data: {
+                    confirm: 'Are you sure to delete this Expense Sub Category?'
+            } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

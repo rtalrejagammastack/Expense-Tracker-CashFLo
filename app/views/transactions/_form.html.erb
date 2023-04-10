@@ -81,6 +81,15 @@
   </div>
 
   <div class="row mb-4 mb-4">
+    <div class="col-md-12">
+      <div class="form-outline">
+        <%= form.label :documents, "Related Document", class: 'form-label' %>
+        <%= form.file_field :documents, multiple: true %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mb-4">
     <div class="col d-flex justify-content-around">
       <div>
         <%= form.submit class:"btn btn-success btn-block shadow btn-lg" %>

@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 2023_04_06_180851) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
+    t.index ["destroyed_at"], name: "index_expense_categories_on_destroyed_at"
     t.index ["slug"], name: "index_expense_categories_on_slug", unique: true
     t.index ["user_category_id"], name: "index_expense_categories_on_user_category_id"
   end
@@ -63,20 +64,9 @@ ActiveRecord::Schema.define(version: 2023_04_06_180851) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
     t.index ["category_id"], name: "index_expense_sub_categories_on_category_id"
+    t.index ["destroyed_at"], name: "index_expense_sub_categories_on_destroyed_at"
     t.index ["slug"], name: "index_expense_sub_categories_on_slug", unique: true
     t.index ["user_category_id"], name: "index_expense_sub_categories_on_user_category_id"
-  end
-
-  create_table "friendly_id_slugs", force: :cascade do |t|
-    t.string "slug", null: false
-    t.integer "sluggable_id", null: false
-    t.string "sluggable_type", limit: 50
-    t.string "scope"
-    t.datetime "created_at"
-    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
-    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
-    t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
-    t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
   end
 
   create_table "transaction_modes", force: :cascade do |t|
@@ -84,6 +74,9 @@ ActiveRecord::Schema.define(version: 2023_04_06_180851) do
     t.datetime "destroyed_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
+    t.index ["destroyed_at"], name: "index_transaction_modes_on_destroyed_at"
+    t.index ["slug"], name: "index_transaction_modes_on_slug", unique: true
   end
 
   create_table "transaction_statuses", force: :cascade do |t|
@@ -91,6 +84,9 @@ ActiveRecord::Schema.define(version: 2023_04_06_180851) do
     t.datetime "destroyed_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
+    t.index ["destroyed_at"], name: "index_transaction_statuses_on_destroyed_at"
+    t.index ["slug"], name: "index_transaction_statuses_on_slug", unique: true
   end
 
   create_table "transaction_types", force: :cascade do |t|
@@ -98,6 +94,9 @@ ActiveRecord::Schema.define(version: 2023_04_06_180851) do
     t.datetime "destroyed_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
+    t.index ["destroyed_at"], name: "index_transaction_types_on_destroyed_at"
+    t.index ["slug"], name: "index_transaction_types_on_slug", unique: true
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -110,6 +109,13 @@ ActiveRecord::Schema.define(version: 2023_04_06_180851) do
     t.bigint "status_id", null: false
     t.bigint "type_id", null: false
     t.bigint "mode_id", null: false
+    t.bigint "payee_id"
+    t.bigint "payer_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "destroyed_at"
+    t.string "slug"
+    t.index ["destroyed_at"], name: "index_transactions_on_destroyed_at"
     t.bigint "payee_id", null: false
     t.bigint "payer_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -118,6 +124,7 @@ ActiveRecord::Schema.define(version: 2023_04_06_180851) do
     t.index ["mode_id"], name: "index_transactions_on_mode_id"
     t.index ["payee_id"], name: "index_transactions_on_payee_id"
     t.index ["payer_id"], name: "index_transactions_on_payer_id"
+    t.index ["slug"], name: "index_transactions_on_slug", unique: true
     t.index ["status_id"], name: "index_transactions_on_status_id"
     t.index ["type_id"], name: "index_transactions_on_type_id"
     t.index ["user_category_id"], name: "index_transactions_on_user_category_id"

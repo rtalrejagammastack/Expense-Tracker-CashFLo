@@ -3,6 +3,10 @@ module ApplicationHelper
     current_user.categories
   end
 
+  def transaction_types
+    TransactionType.all
+  end
+
   def image_file(name)
     file_path = Rails.root.join('app', 'assets', 'images', name)
     {

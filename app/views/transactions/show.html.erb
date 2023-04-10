@@ -1,0 +1,5 @@
+<%= render partial: 'shared/heading', locals: { heading: 'Transaction' } %>
+
+<% if @transaction.documents.attached? %>
+  <%= render partial:'documents' %>
+<% end %>

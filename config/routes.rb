@@ -10,9 +10,8 @@ Rails.application.routes.draw do
       resources :expense_sub_categories, param: :slug, only: %i[new create edit update destroy]
     end
     resources :transactions, param: :slug do
-      collection do
-        get 'expense_category/:id', to: 'transactions#fetch_expense_sub_categories'
-      end
+      get 'filter', on: :collection, action: 'index'
+      get 'expense_category/:id', on: :collection, action: 'fetch_expense_sub_categories'
     end
   end
 end

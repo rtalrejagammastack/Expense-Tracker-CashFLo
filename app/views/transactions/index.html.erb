@@ -12,6 +12,8 @@
 <br/>
 <br/>
 
+<%= render partial: 'filter' %>
+
 <%= render partial: 'transactions', locals: { transactions: @transactions, user_category: @user_category } %>
 
 <%= will_paginate @transactions_per_page, renderer: BootstrapPagination::Rails %>

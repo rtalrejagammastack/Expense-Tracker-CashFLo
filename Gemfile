@@ -47,6 +47,9 @@ group :development do
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'rubocop'
   gem 'awesome_print'
+  gem 'factory_bot_rails'
+  gem 'shoulda'
+  gem 'shoulda-matchers', require: false
 end
 
 group :test do
@@ -56,6 +59,7 @@ group :test do
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
   gem 'faker'
+  gem 'rspec-rails'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

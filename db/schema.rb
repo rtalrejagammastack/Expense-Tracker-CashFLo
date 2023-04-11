@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_06_180851) do
+ActiveRecord::Schema.define(version: 2023_04_10_194714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,10 +116,6 @@ ActiveRecord::Schema.define(version: 2023_04_06_180851) do
     t.datetime "destroyed_at"
     t.string "slug"
     t.index ["destroyed_at"], name: "index_transactions_on_destroyed_at"
-    t.bigint "payee_id", null: false
-    t.bigint "payer_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.index ["expense_sub_category_id"], name: "index_transactions_on_expense_sub_category_id"
     t.index ["mode_id"], name: "index_transactions_on_mode_id"
     t.index ["payee_id"], name: "index_transactions_on_payee_id"
@@ -151,7 +147,7 @@ ActiveRecord::Schema.define(version: 2023_04_06_180851) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
-    t.integer "phone_number"
+    t.bigint "phone_number"
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"

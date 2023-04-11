@@ -13,7 +13,7 @@ class User < ApplicationRecord
 
   has_one_attached :avatar, dependent: :destroy
   
-  DEFAULT_CATEGORY = "FAMILY".freeze
+  DEFAULT_CATEGORY = "Family".freeze
 
   # Callbacks
   after_create :create_default_category

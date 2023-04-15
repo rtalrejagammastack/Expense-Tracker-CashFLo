@@ -1,0 +1,18 @@
+<h1>Notifications</h1>
+
+<ul id="notifications">
+  <%= render @notifications %>
+</ul>
+
+<%= javascript_tag do %>
+  $(function() {
+    App.notifications = App.cable.subscriptions.create({
+      channel: 'NotificationsChannel'
+    }, {
+      received: function(data) {
+        $('#notifications').prepend('<%= j render data.notification %>');
+        $('#unread-count').text(data.count);
+      }
+    });
+  });
+<% end %>

@@ -1,0 +1,9 @@
+<% if @notifications.any? %>
+  <ul>
+    <% @notifications.each do |notification| %>
+      <%= render 'notification', notification: notification %>
+    <% end %>
+  </ul>
+<% else %>
+  <p>You have no notifications.</p>
+<% end %>

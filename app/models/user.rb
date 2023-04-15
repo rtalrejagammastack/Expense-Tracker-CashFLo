@@ -26,11 +26,17 @@ class User < ApplicationRecord
   has_many :expense_sub_categories, through: :expense_categories, source: :sub_categories
   has_many :transactions, class_name: 'Transaction', foreign_key: 'payer_id', dependent: :destroy
   has_many :receive_transactions, class_name: 'Transaction', foreign_key: 'payee_id', dependent: :destroy
+  has_many :notifications
 
   def create_default_category
     default_category = categories.create(name: DEFAULT_CATEGORY)
     default_category.background.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'family.png')), filename: 'family.png', content_type: 'image/png')
   end
+
+  def unread_notification_count
+    notifications.unread.count
+  end
+  
   def self.ransackable_attributes(auth_object = nil)
     ["name"]
   end

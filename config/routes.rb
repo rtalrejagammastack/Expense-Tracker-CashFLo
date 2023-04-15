@@ -14,4 +14,9 @@ Rails.application.routes.draw do
       get 'expense_category/:id', on: :collection, action: 'fetch_expense_sub_categories'
     end
   end
+  resources :notifications, only: [:index] do
+    member do
+      patch :mark_as_read
+    end
+  end
 end

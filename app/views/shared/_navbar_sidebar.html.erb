@@ -58,6 +58,13 @@
 
       <!-- Right links -->
       <ul class="navbar-nav ms-auto d-flex flex-row">
+        <li class="nav-item">
+          <li class="nav-link">
+            <span id="unread-count" ><%= current_user.notifications.unread.count %></span>
+            <%= link_to 'Notifications', notifications_path %>
+          </li>
+        </li>
+        <%= unread_notification_count %>
         <!-- Avatar -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
@@ -96,3 +103,4 @@
   </div>
 </main>
 <!--Main layout-->
+

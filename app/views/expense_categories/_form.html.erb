@@ -1,3 +1,8 @@
+<%= render partial: 'shared/heading', locals: { heading: "#{ action_name.capitalize } #{ expense_category.name.nil? ? "Expense" : expense_category.name } Category For #{ user_category.name } Category" } %>
+
+<%= form_with model: [user_category, expense_category] do |form| %>
+
+  <%= render partial: 'shared/errors', locals: { resource: expense_category } %>
 <%= render partial: 'shared/heading', locals: { heading: "#{ action_name.capitalize } #{ @expense_category.name.nil? ? "Expense" : @expense_category.name } Category For #{ @user_category.name } Category" } %>
 
 <%= form_with model: [@user_category, @expense_category] do |form| %>

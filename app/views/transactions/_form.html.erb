@@ -43,6 +43,118 @@
     <div class="col-md-4 mb-4">
         <%= form.label :type_id, class:"form-label" %>
         <%= form.select :type_id, options_for_select([[transaction_type.name, transaction_type.id]]), { }, class:'form-control form-control-lg' %>
+<<<<<<< Updated upstream
+        <%= form.select :type_id, options_for_select([[transaction_type.name, transaction_type.id]]), { }, class:'form-control form-control-lg', disabled: true %>
+=======
+>>>>>>> Stashed changes
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <%= form.label :status_id, class:"form-label" %>
+        <%= form.select :status_id, options_for_select(transaction_status), { prompt: 'Select Status' }, class:'form-control form-control-lg' %>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <%= form.label :mode_id, class:"form-label" %>
+        <%= form.select :mode_id, options_for_select(@modes_options),{ prompt: 'Select Mode' }, class:'form-control form-control-lg' %>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <%= form.label :user_category_id, class:"form-label" %>
+        <%= form.select :user_category_id, options_for_select([[user_category.name, user_category.id]]), { }, class:'form-control form-control-lg', disabled: true %>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <%= form.label :expense_category_id, class:"form-label" %>
+        <%= form.select :expense_category_id, options_for_select(@expense_categories), { prompt: 'Select Expense Category' }, class:'form-control form-control-lg' %>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <%= form.label :expense_sub_category, class:"form-label" %>
+        <%= form.select :expense_sub_category_id, options_for_select( "None" ), { prompt: 'Select Expense Sub-Category' }, class:'form-control form-control-lg' %>
+    </div>
+  </div>
+
+  <div class="row mb-4 mb-4">
+    <div class="col-md-12">
+      <div class="form-outline">
+        <%= form.text_area :description, autofocus: true, class:"form-control form-control-lg" %>
+        <%= form.label :description, class:"form-label" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mb-4">
+    <div class="col-md-12">
+      <div class="form-outline">
+        <%= form.label :documents, "Related Document", class: 'form-label' %>
+        <%= form.file_field :documents, multiple: true %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mb-4">
+    <div class="col d-flex justify-content-around">
+      <div>
+        <%= form.submit class:"btn btn-success btn-block shadow btn-lg" %>
+      </div>
+      <div>
+        <%= link_to "Cancel", user_category_path(user_category), class: 'btn btn-danger btn-lg shadow' %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<script>
+  $(document).ready(function(){
+    $('#transaction_expense_category_id').on('change',function(){
+      let expense_category = $(this).val();
+      let user_category = $('#transaction_user_category_id').val();
+<%= render partial: 'shared/heading', locals: { heading: "#{ action_name.capitalize } #{ transaction_type&.name } Transaction" } %>
+
+<%= form_with model: [user_category, transaction] do |form| %>
+
+  <div class="row"> 
+    <% if transaction_type.name == "Expense" %>
+      <div class="col-md-4 mb-4">
+        <div class="form-outline">
+          <%= form.text_field :payer_name, value:current_user.name, class:"form-control form-control-lg", readonly:true %>
+          <%= form.label :payer_name, "Payer", class:"form-label" %>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="form-outline">
+          <%= form.text_field :payee_name, autofocus: true, class:"form-control form-control-lg" %>
+          <%= form.label :payee_name, "Payee", class:"form-label" %>
+        </div>
+      </div>
+    <% elsif transaction_type.name == "Income" %>
+      <div class="col-md-4 mb-4">
+        <div class="form-outline">
+          <%= form.text_field :payee_name, autofocus: true, value: current_user.name, class:"form-control form-control-lg", readonly:true %>
+          <%= form.label :payee_name, "Payee", class:"form-label" %>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="form-outline">
+          <%= form.text_field :payer_name, autofocus: true, class:"form-control form-control-lg" %>
+          <%= form.label :payer_name, "Payer", class:"form-label" %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="col-md-4 mb-4"> 
+      <div class="form-outline">
+        <%= form.number_field :amount, autofocus: true, class:"form-control form-control-lg", required:true %>
+        <%= form.label :amount, class:"form-label" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row"> 
+    <div class="col-md-4 mb-4">
+        <%= form.label :type_id, class:"form-label" %>
+        <%= form.select :type_id, options_for_select([[transaction_type.name, transaction_type.id]]), { }, class:'form-control form-control-lg' %>
     </div>
 
     <div class="col-md-4 mb-4">

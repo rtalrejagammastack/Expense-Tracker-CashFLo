@@ -13,4 +13,9 @@ class Notification < ApplicationRecord
       count: user.notifications.unread.count
     })
   end
+  default_scope { order(created_at: :desc) }
+
+  # after_create_commit -> { NotificationBroadcastJob.perform_later(self) }
+
+  scope :unread, -> { where(read: false) }
 end

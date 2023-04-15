@@ -48,6 +48,7 @@ group :development, :test do
   gem 'ransack'
   gem 'sidekiq'
   gem 'whenever', require: false
+  gem 'actioncable'
 end
 
 group :development do

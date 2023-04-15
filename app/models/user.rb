@@ -27,6 +27,7 @@ class User < ApplicationRecord
   has_many :transactions, class_name: 'Transaction', foreign_key: 'payer_id', dependent: :destroy
   has_many :receive_transactions, class_name: 'Transaction', foreign_key: 'payee_id', dependent: :destroy
   has_many :notifications
+  has_many :notifications, dependent: :destroy
 
   def create_default_category
     default_category = categories.create(name: DEFAULT_CATEGORY)

@@ -1,0 +1,36 @@
+<div id="notifications-bell">
+  <i class="fa fa-bell"></i>
+  <span id="notifications-count"></span>
+</div>
+
+<div id="notifications-modal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Notifications</h4>
+      </div>
+      <div class="modal-body">
+        <ul id="notifications-list"></ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$(function() {
+  // Subscribe to the notifications channel
+  App.notifications = App.cable.subscriptions.create("NotificationsChannel", {
+    received: function(data) {
+      $('#notifications-list').prepend('<li class="unread">' + data.message + '<span class="timestamp">' + data.created_at + '</span></li>');
+      $('#notifications-count').html(parseInt($('#notifications-count').html()) + 1);
+    }
+  });
+
+  // Show the notifications modal when the bell icon is clicked
+  $('#notifications-bell').on('click', function() {
+    $('#notifications-modal').modal('show');
+    $('#notifications-count').html('');
+    $('#notifications-list li.unread').removeClass('unread');
+  });
+});
+</script>

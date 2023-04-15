@@ -65,6 +65,10 @@
           </li>
         </li>
         <%= unread_notification_count %>
+          <%= link_to "Notifications", notifications_path %>
+          <span id="notifications-count"><%= current_user.notifications.unread.count %></span>
+          <span id="notifications-bell"></span>
+        </li>
         <!-- Avatar -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">

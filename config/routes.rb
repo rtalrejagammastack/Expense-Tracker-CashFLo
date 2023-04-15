@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount ActionCable.server => '/cable'
+
   devise_for :users, controllers: { confirmations: 'users/confirmations' }
   devise_scope :user do
     root 'devise/sessions#new'
@@ -19,4 +21,9 @@ Rails.application.routes.draw do
       patch :mark_as_read
     end
   end
+
+  # put '/notifications/update', to: 'notifications#update'
+  # get '/notifications/unread_count', to: 'notifications#unread_count'
+  # resources :notifications
+  resources :notifications, only: [:index]
 end

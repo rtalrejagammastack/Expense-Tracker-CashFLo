@@ -17,9 +17,9 @@
                 </div>
               </li>
               <% user_categories.each do |category| %>
-                  <li>
-                      <%= link_to "#{category.name}", user_category_path(category), class:"dropdown-item" %>
-                  </li>
+                <li>
+                  <%= link_to "#{category.name}", user_category_path(category), class:"dropdown-item" %>
+                </li>
               <% end %>
             </ul>
           </div>
@@ -40,7 +40,9 @@
       </button>
 
       <!-- Brand -->
-      <%= link_to image_tag("logo.png",height: 25,alt:"Company Logo",loading:"lazy"),root_path,class:"navbar-brand" %>
+      <%= link_to root_path do %>
+        <%= image_tag t('project.logo.file_name'), height: 25, alt:"Company Logo", loading:"lazy", class:'navbar-brand' %>
+      <% end %>
 
       <!-- Search form -->
       <form class="d-none d-md-flex input-group w-auto my-auto">
@@ -67,10 +69,10 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
             <li> 
-              <%= link_to "My Profile", edit_user_registration_path, class:'dropdown-item' %>
+              <%= link_to t("links.profile"), edit_user_registration_path, class:'dropdown-item' %>
             </li>
             <li>
-              <%= link_to "Logout",destroy_user_session_path ,class:"dropdown-item" ,method: :delete %>
+              <%= link_to t("links.sign_out"), destroy_user_session_path ,class:"dropdown-item" ,method: :delete %>
             </li>
           </ul>
         </li>

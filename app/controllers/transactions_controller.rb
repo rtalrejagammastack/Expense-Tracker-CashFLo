@@ -26,6 +26,7 @@ class TransactionsController < ApplicationController
     @transaction = @user_category.transactions.new(transaction_params)
 
     if @transaction.save!
+      TransactionJob.perform_later(@transaction, current_user)
       redirect_to user_category_transaction_path(@user_category, @transaction), notice: 'Transaction was successfully created.'
     else
       render :new, status: :unprocessable_entity, alert: 'Transaction was unable to create.'
@@ -40,6 +41,7 @@ class TransactionsController < ApplicationController
 
   def update
     if @transaction.update(transaction_params)
+      TransactionJob.perform_later(@transaction, current_user)
       redirect_to user_category_transaction_path(@user_category, @transaction), notice: 'Transaction was successfully updated.'
     else
       render :edit, status: :unprocessable_entity, alert: 'Transaction was unable to update.'
@@ -82,6 +84,12 @@ class TransactionsController < ApplicationController
     @all_transactions = @all_transactions.where(type: @type) if params[:type].present?
     @all_transactions = @all_transactions.where(status: @status) if params[:status].present?
     @all_transactions = @all_transactions.where(mode: @mode) if params[:mode].present?
+  end
+
+  def fetch_filter_parameters
+    @type = TransactionType.friendly.find(params[:type]) if params[:type].present?
+    @status = TransactionStatus.friendly.find(params[:status]) if params[:status].present?
+    @mode = TransactionMode.friendly.find(params[:mode]) if params[:mode].present?
   end
 
   def find_user_category

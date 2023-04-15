@@ -20,6 +20,11 @@ require 'faker'
   description = Faker::Lorem.paragraph
   payer_name = Faker::Name.name
   payee_name = Faker::Name.name
+  category = Faker::Number.between(from: 13, to: 15)
+  expense_sub_category = Faker::Number.between(from: 16, to: 18)
+  status = Faker::Number.between(from: 1, to: 2)
+  type = Faker::Number.between(from: 1, to: 2)
+  mode = Faker::Number.between(from: 1, to: 4)
   category = 20
   expense_sub_category = Faker::Number.between(from: 19, to: 20)
   status = Faker::Number.between(from: 9, to: 10)

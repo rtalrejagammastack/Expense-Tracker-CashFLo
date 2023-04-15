@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_15_101713) do
+ActiveRecord::Schema.define(version: 2023_04_15_130013) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,14 +59,12 @@ ActiveRecord::Schema.define(version: 2023_04_15_101713) do
     t.string "name"
     t.datetime "destroyed_at"
     t.bigint "category_id", null: false
-    t.bigint "user_category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
     t.index ["category_id"], name: "index_expense_sub_categories_on_category_id"
     t.index ["destroyed_at"], name: "index_expense_sub_categories_on_destroyed_at"
     t.index ["slug"], name: "index_expense_sub_categories_on_slug", unique: true
-    t.index ["user_category_id"], name: "index_expense_sub_categories_on_user_category_id"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -118,8 +116,6 @@ ActiveRecord::Schema.define(version: 2023_04_15_101713) do
     t.bigint "status_id", null: false
     t.bigint "type_id", null: false
     t.bigint "mode_id", null: false
-    t.bigint "payee_id"
-    t.bigint "payer_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "destroyed_at"
@@ -127,8 +123,6 @@ ActiveRecord::Schema.define(version: 2023_04_15_101713) do
     t.index ["destroyed_at"], name: "index_transactions_on_destroyed_at"
     t.index ["expense_sub_category_id"], name: "index_transactions_on_expense_sub_category_id"
     t.index ["mode_id"], name: "index_transactions_on_mode_id"
-    t.index ["payee_id"], name: "index_transactions_on_payee_id"
-    t.index ["payer_id"], name: "index_transactions_on_payer_id"
     t.index ["slug"], name: "index_transactions_on_slug", unique: true
     t.index ["status_id"], name: "index_transactions_on_status_id"
     t.index ["type_id"], name: "index_transactions_on_type_id"
@@ -172,14 +166,11 @@ ActiveRecord::Schema.define(version: 2023_04_15_101713) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "expense_categories", "user_categories"
   add_foreign_key "expense_sub_categories", "expense_categories", column: "category_id"
-  add_foreign_key "expense_sub_categories", "user_categories"
   add_foreign_key "notifications", "users"
   add_foreign_key "transactions", "expense_sub_categories"
   add_foreign_key "transactions", "transaction_modes", column: "mode_id"
   add_foreign_key "transactions", "transaction_statuses", column: "status_id"
   add_foreign_key "transactions", "transaction_types", column: "type_id"
   add_foreign_key "transactions", "user_categories"
-  add_foreign_key "transactions", "users", column: "payee_id"
-  add_foreign_key "transactions", "users", column: "payer_id"
   add_foreign_key "user_categories", "users"
 end

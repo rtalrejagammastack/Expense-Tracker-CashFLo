@@ -12,16 +12,16 @@ class ExpenseCategoriesController < ApplicationController
   end
 
   def new
-    @expense_category = @user_category.expense_categories.
+    @expense_category = @user_category.expense_categories.build
   end
 
   def create
-    expense_category = @user_category.expense_categories.new(expense_category_params)
+    @expense_category = @user_category.expense_categories.new(expense_category_params)
 
-    if expense_category.save
-      redirect_to user_category_expense_category_path(@user_category, expense_category), notice: I18n.t('activerecord.model.expense_category.create.success', name: expense_category.name) 
+    if @expense_category.save
+      redirect_to user_category_expense_category_path(@user_category, @expense_category), notice: I18n.t('activerecord.model.expense_category.create.success', name: @expense_category.name) 
     else
-      render :new, status: :unprocessable_entity, alert: I18n.t('activerecord.model.expense_category.create.error', name: expense_category.name)
+      render :new, status: :unprocessable_entity, alert: I18n.t('activerecord.model.expense_category.create.error', name: @expense_category.name)
     end
   end
 
@@ -42,9 +42,9 @@ class ExpenseCategoriesController < ApplicationController
 
   def destroy
     if @expense_category.destroy
-      redirect_to user_category_expense_categories_path(@user_category), notice: I18n.t('activerecord.model.expense_category.destroy.success', name: expense_category.name)
+      redirect_to user_category_expense_categories_path(@user_category), notice: I18n.t('activerecord.model.expense_category.destroy.success', name: @expense_category.name)
     else
-      redirect_to user_category_expense_categories_path(@user_category), notice: I18n.t('activerecord.model.expense_category.destroy.error', name: expense_category.name)
+      redirect_to user_category_expense_categories_path(@user_category), notice: I18n.t('activerecord.model.expense_category.destroy.error', name: @expense_category.name)
     end
   end
 

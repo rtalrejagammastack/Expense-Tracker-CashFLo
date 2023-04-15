@@ -33,3 +33,10 @@ end
 
 # Remove user_category from expense sub category
 # removve payer id and payee id from transactions
+
+
+# redirect_to paths 
+# errors and notice
+# locale at everywhere
+# Remove instance variable from everywhere
+# Naming issue of new/create in forms

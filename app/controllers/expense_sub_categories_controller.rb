@@ -12,12 +12,12 @@ class ExpenseSubCategoriesController < ApplicationController
   end
 
   def create
-    expense_sub_category = @expense_category.sub_categories.new(expense_sub_category_params)
+    @expense_sub_category = @expense_category.sub_categories.new(expense_sub_category_params)
 
-    if expense_sub_category.save
-      redirect_to user_category_expense_category_path(@user_category, @expense_category), notice: I18n.t('activerecord.model.expense_sub_category.create.success', name: expense_sub_category.name)
+    if @expense_sub_category.save
+      redirect_to user_category_expense_category_path(@user_category, @expense_category), notice: I18n.t('activerecord.model.expense_sub_category.create.success', name: @expense_sub_category.name)
     else
-      render :new, status: :unprocessable_entity, alert: I18n.t('activerecord.model.expense_sub_category.create.error', name: expense_sub_category.name)
+      render :new, status: :unprocessable_entity, alert: I18n.t('activerecord.model.expense_sub_category.create.error', name: @expense_sub_category.name)
     end
   end
 
@@ -43,7 +43,7 @@ class ExpenseSubCategoriesController < ApplicationController
   private
 
   def expense_sub_category_params
-    params.require(:expense_sub_category).permit(:name).merge(user_category_id: @user_category.id)
+    params.require(:expense_sub_category).permit(:name)
   end
 
   def find_user_category

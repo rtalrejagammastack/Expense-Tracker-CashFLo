@@ -16,7 +16,7 @@ class ExpenseCategory < ApplicationRecord
   validates :name, presence: true
 
   # Associations
-  belongs_to :user_category, optional: true
+  belongs_to :user_category
   has_many :sub_categories, class_name: 'ExpenseSubCategory', foreign_key: 'category_id', dependent: :destroy
 
   scope :map_id_with_name, -> { map { |category| [category.name, category.id] } }

@@ -10,15 +10,15 @@ class UserCategoriesController < ApplicationController
   end
 
   def new
-    @user_category = UserCategory.new
+    @user_category = current_user.categories.build
   end
 
   def create
-    user_category = current_user.categories.new(category_params)
-    if user_category.save
-      redirect_to user_category_path(user_category), notice: I18n.t("activerecord.model.user_category.create.success", name: user_category.name) 
+    @user_category = current_user.categories.build(category_params)
+    if @user_category.save
+      redirect_to user_category_path(@user_category), notice: I18n.t("activerecord.model.user_category.create.success", name: @user_category.name) 
     else
-      render :new, status: :unprocessable_entity, alert: I18n.t("activerecord.model.user_category.create.error", name: user_category.name)
+      render :new, status: :unprocessable_entity, alert: I18n.t("activerecord.model.user_category.create.error", name: @user_category.name)
     end
   end
 
@@ -40,7 +40,7 @@ class UserCategoriesController < ApplicationController
     if @user_category.destroy
       redirect_to user_categories_path, notice: I18n.t("activerecord.model.user_category.destroy.success", name: @user_category.name)
     else
-      redirect_to @user_category, alert: I18n.t("activerecord.model.user_category.destroy.error", name: @user_category.name)
+      redirect_to user_category_path(@user_category), alert: I18n.t("activerecord.model.user_category.destroy.error", name: @user_category.name)
     end
   end
 

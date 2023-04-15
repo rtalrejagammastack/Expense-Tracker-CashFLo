@@ -1,4 +1,4 @@
-<%= render partial: 'shared/heading', locals: { heading: "#{ action_name.capitalize } #{ user_category.name.nil? ? "User" : user_category.name } Category" } %>
+<%= render partial: 'shared/heading', locals: { heading: "#{ action_name.capitalize } User Category" } %>
 
 <%= form_with model: [user_category] do |form| %>
 

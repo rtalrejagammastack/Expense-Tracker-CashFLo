@@ -10,5 +10,4 @@ class ApplicationRecord < ActiveRecord::Base
   end
 
   WillPaginate.per_page = 10
-  
 end

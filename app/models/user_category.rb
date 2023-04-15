@@ -17,8 +17,9 @@ class UserCategory < ApplicationRecord
   # Associations
   belongs_to :user
   has_many :expense_categories, dependent: :destroy
-  has_many :expense_sub_categories, through: :expense_categories, source: :sub_categories
-  has_many :transactions
+  has_many :expense_sub_categories
+  # has_many :expense_sub_categories, through: :expense_categories, source: :sub_categories
+  has_many :transactions, dependent: :destroy
 
   def expense_subcategories_by_expense_category_hash
     subcategories_by_expense_category = {}

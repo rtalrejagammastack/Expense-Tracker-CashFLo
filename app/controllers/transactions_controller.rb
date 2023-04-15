@@ -86,12 +86,6 @@ class TransactionsController < ApplicationController
     @all_transactions = @all_transactions.where(mode: @mode) if params[:mode].present?
   end
 
-  def fetch_filter_parameters
-    @type = TransactionType.friendly.find(params[:type]) if params[:type].present?
-    @status = TransactionStatus.friendly.find(params[:status]) if params[:status].present?
-    @mode = TransactionMode.friendly.find(params[:mode]) if params[:mode].present?
-  end
-
   def find_user_category
     @user_category = UserCategory.friendly.find(params[:user_category_slug])
   end

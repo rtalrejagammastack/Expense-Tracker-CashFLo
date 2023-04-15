@@ -12,7 +12,7 @@ class ExpenseCategoriesController < ApplicationController
   end
 
   def new
-    @expense_category = @user_category.expense_categories.new
+    @expense_category = @user_category.expense_categories.
   end
 
   def create

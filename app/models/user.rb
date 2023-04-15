@@ -10,10 +10,8 @@ class User < ApplicationRecord
 
   acts_as_paranoid column: :destroyed_at
 
-  has_one_attached :avatar, dependent: :destroy
+  DEFAULT_CATEGORY = "Family".freeze
   
-  DEFAULT_CATEGORY = "FAMILY".freeze
-
   # Callbacks
   after_create :create_default_category
 
@@ -23,19 +21,15 @@ class User < ApplicationRecord
   # Associations
   has_many :categories, class_name: 'UserCategory', foreign_key: 'user_id', dependent: :destroy
   has_many :expense_categories, through: :categories
-  has_many :expense_sub_categories, through: :expense_categories, source: :sub_categories
+  has_many :expense_sub_categories, through: :categories
+  # has_many :expense_sub_categories, through: :expense_categories, source: :sub_categories
   has_many :transactions, class_name: 'Transaction', foreign_key: 'payer_id', dependent: :destroy
   has_many :receive_transactions, class_name: 'Transaction', foreign_key: 'payee_id', dependent: :destroy
-  has_many :notifications
-  has_many :notifications, dependent: :destroy
+  has_one_attached :avatar, dependent: :destroy
 
   def create_default_category
     default_category = categories.create(name: DEFAULT_CATEGORY)
     default_category.background.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'family.png')), filename: 'family.png', content_type: 'image/png')
-  end
-
-  def unread_notification_count
-    notifications.unread.count
   end
   
   def self.ransackable_attributes(auth_object = nil)

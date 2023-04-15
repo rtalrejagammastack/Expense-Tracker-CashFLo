@@ -2,6 +2,7 @@
 
 # Model to Store User data
 class User < ApplicationRecord
+  include ApplicationHelper
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -18,7 +19,7 @@ class User < ApplicationRecord
   after_create :create_default_category
 
   validates :name, presence: true
-  validates :phone_number, presence: true, length: { is: 10, message: 'must have 10 digit.' }
+  validates :phone_number, presence: true, length: { is: 10, message: I18n.t('activerecord.model.user.attributes.phone_number') }
 
   # Associations
   has_many :categories, class_name: 'UserCategory', foreign_key: 'user_id', dependent: :destroy

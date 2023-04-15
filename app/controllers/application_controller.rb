@@ -22,6 +22,6 @@ class ApplicationController < ActionController::Base
   private
 
   def record_not_found
-    redirect_to home_index_path, alert: 'Record not found'
+    redirect_to home_index_path, alert: I18n.t("activerecord.error")
   end
 end

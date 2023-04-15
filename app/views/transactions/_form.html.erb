@@ -43,6 +43,7 @@
     <div class="col-md-4 mb-4">
         <%= form.label :type_id, class:"form-label" %>
         <%= form.select :type_id, options_for_select([[transaction_type.name, transaction_type.id]]), { }, class:'form-control form-control-lg' %>
+        <%= form.select :type_id, options_for_select([[transaction_type.name, transaction_type.id]]), { }, class:'form-control form-control-lg', disabled: true %>
     </div>
 
     <div class="col-md-4 mb-4">

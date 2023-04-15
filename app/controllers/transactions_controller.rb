@@ -26,6 +26,7 @@ class TransactionsController < ApplicationController
     @transaction = @user_category.transactions.new(transaction_params)
 
     if @transaction.save!
+      TransactionJob.perform_later(@transaction, current_user)
       redirect_to user_category_transaction_path(@user_category, @transaction), notice: 'Transaction was successfully created.'
     else
       render :new, status: :unprocessable_entity, alert: 'Transaction was unable to create.'
@@ -40,6 +41,7 @@ class TransactionsController < ApplicationController
 
   def update
     if @transaction.update(transaction_params)
+      TransactionJob.perform_later(@transaction, current_user)
       redirect_to user_category_transaction_path(@user_category, @transaction), notice: 'Transaction was successfully updated.'
     else
       render :edit, status: :unprocessable_entity, alert: 'Transaction was unable to update.'

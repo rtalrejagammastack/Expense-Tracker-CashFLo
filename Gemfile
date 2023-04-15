@@ -40,12 +40,6 @@ group :development, :test do
   gem 'will_paginate'
   gem 'will_paginate-bootstrap'
   gem 'ransack'
-  gem 'devise'
-  gem 'friendly_id'
-  gem 'paranoia'
-  gem 'will_paginate'
-  gem 'will_paginate-bootstrap'
-  gem 'ransack'
   gem 'sidekiq'
   gem 'whenever', require: false
   gem 'actioncable'
@@ -57,6 +51,7 @@ group :development do
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
   gem 'rack-mini-profiler', '~> 2.0'
+  gem 'awesome_print'
 end
 
 group :test do

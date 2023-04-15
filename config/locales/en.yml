@@ -1,5 +1,4 @@
 en:
-  hello: "Hello world"
   transaction_mailer:
     new_transaction:
       subject: New transaction

@@ -12,9 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2023_04_15_130013) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -46,7 +43,7 @@ ActiveRecord::Schema.define(version: 2023_04_15_130013) do
   create_table "expense_categories", force: :cascade do |t|
     t.string "name"
     t.datetime "destroyed_at"
-    t.bigint "user_category_id"
+    t.integer "user_category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
@@ -58,7 +55,7 @@ ActiveRecord::Schema.define(version: 2023_04_15_130013) do
   create_table "expense_sub_categories", force: :cascade do |t|
     t.string "name"
     t.datetime "destroyed_at"
-    t.bigint "category_id", null: false
+    t.integer "category_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
@@ -68,7 +65,7 @@ ActiveRecord::Schema.define(version: 2023_04_15_130013) do
   end
 
   create_table "notifications", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.integer "user_id", null: false
     t.text "message"
     t.boolean "read", default: false
     t.datetime "created_at", precision: 6, null: false
@@ -111,11 +108,11 @@ ActiveRecord::Schema.define(version: 2023_04_15_130013) do
     t.text "description"
     t.string "payer_name"
     t.string "payee_name"
-    t.bigint "user_category_id", null: false
-    t.bigint "expense_sub_category_id", null: false
-    t.bigint "status_id", null: false
-    t.bigint "type_id", null: false
-    t.bigint "mode_id", null: false
+    t.integer "user_category_id", null: false
+    t.integer "expense_sub_category_id", null: false
+    t.integer "status_id", null: false
+    t.integer "type_id", null: false
+    t.integer "mode_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "destroyed_at"
@@ -131,7 +128,7 @@ ActiveRecord::Schema.define(version: 2023_04_15_130013) do
 
   create_table "user_categories", force: :cascade do |t|
     t.string "name"
-    t.bigint "user_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"

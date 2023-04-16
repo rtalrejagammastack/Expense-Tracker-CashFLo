@@ -137,8 +137,6 @@ GEM
     orm_adapter (0.5.0)
     paranoia (2.6.1)
       activerecord (>= 5.1, < 7.1)
-    pg (1.4.6)
-    pg (1.4.6-x64-mingw32)
     public_suffix (5.0.1)
     puma (5.6.5)
       nio4r (~> 2.0)
@@ -218,6 +216,8 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    sqlite3 (1.6.2-x64-mingw32)
+    sqlite3 (1.6.2-x86_64-linux)
     thor (1.2.1)
     tilt (2.1.0)
     timeout (0.3.2)
@@ -274,7 +274,6 @@ DEPENDENCIES
   groupdate
   jbuilder (~> 2.7)
   paranoia
-  pg (~> 1.1)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.7, >= 6.1.7.3)
@@ -282,6 +281,7 @@ DEPENDENCIES
   sass-rails (>= 6)
   selenium-webdriver (>= 4.0.0.rc1)
   sidekiq
+  sqlite3
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 4.1.0)

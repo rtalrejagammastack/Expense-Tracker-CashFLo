@@ -1,6 +1,30 @@
 <h1>Home</h1>
 
 
-<%= line_chart Transaction.group_by_month(:created_at).group(:id).sum(:amount) %>
+<%= pie_chart current_user.transactions.joins(:user_category).group('user_categories.name').sum(:amount), width: "300px", height: "300px", prefix: 'Rs.', loading: "Loading...", empty: "No data", refresh: 60, download: { filename: 'Transactions as Per Category', background:'#ffffff' } %>
 
-<h1>Home</h1>
+<% current_user.categories.each do |category| %>
+  <h1 class="text-center"><%= category.name %></h1>
+  <div class="graph-container">
+      <div class="graph">
+        <%= pie_chart category.transactions.joins(:type).group(:name).sum(:amount), width: "300px", height: "300px", prefix: 'Rs.', loading: "Loading...", empty: "No data", refresh: 60, download: { filename: "#{category.name} Category Transactions as per Type", background:'#ffffff' } %>
+      </div>
+      <div class="graph">
+        <%= pie_chart category.transactions.joins(:expense_sub_category).group(:name).sum(:amount), width: "300px", height: "300px", prefix: 'Rs.', loading: "Loading...", empty: "No data", refresh: 60, download: { filename: "#{category.name} Category Transactions as per Exppense Sub Category", background:'#ffffff' } %>
+      </div>
+      <div class="graph">
+        <%= pie_chart category.transactions.joins(:status).group(:name).count, width: "300px", height: "300px", prefix: 'Rs.', loading: "Loading...", empty: "No data", refresh: 60, download: { filename: "#{category.name} Category Transactions as per Exppense Sub Category", background:'#ffffff' } %>
+      </div>
+  </div>
+<% end %>
+
+<style>
+.graph-container {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.graph {
+  flex-basis: 33.33%;
+}
+</style>

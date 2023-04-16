@@ -15,16 +15,31 @@
 require 'faker'
 
 # # Generate 50 random transactions
-500.times do
+1000.times do
   amount = Faker::Number.between(from: 100, to: 2000)
   description = Faker::Lorem.paragraph
-  payer_name = "Fake"
-  payee_name = Faker::Name.name
-  category = 26
-  expense_sub_category = Faker::Number.between(from: 30, to: 31)
-  status = Faker::Number.between(from: 11, to: 12)
-  type = Faker::Number.between(from: 5, to: 6)
-  mode = Faker::Number.between(from: 9, to: 12)
+  type = Faker::Number.between(from: 1, to: 2)
+  if type==1
+    payer_name = "Fake"
+    payee_name = Faker::Name.name
+  else
+    payee_name = "Fake"
+    payer_name = Faker::Name.name
+  end
+  category = Faker::Number.between(from: 1, to: 5)
+  if category == 1
+    expense_sub_category = Faker::Number.between(from: 3, to: 8)
+  elsif category == 2
+    expense_sub_category = Faker::Number.between(from: 9, to: 12)
+  elsif category == 3
+    expense_sub_category = Faker::Number.between(from: 13, to: 16)
+  elsif category == 4
+    expense_sub_category = Faker::Number.between(from: 17, to: 21)
+  elsif category == 5
+    expense_sub_category = Faker::Number.between(from: 22, to: 23)
+  end
+  status = Faker::Number.between(from: 1, to: 2)
+  mode = Faker::Number.between(from: 1, to: 4)
   created_at = Faker::Date.between(from: 1.year.ago, to: Date.today)
   Transaction.create!(amount: amount, description: description, payer_name: payer_name, payee_name: payee_name, user_category_id: category, expense_sub_category_id: expense_sub_category, status_id: status, type_id: type, mode_id: mode, created_at: created_at)
 end

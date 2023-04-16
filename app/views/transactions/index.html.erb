@@ -1,4 +1,4 @@
-<%= render partial: 'shared/heading', locals: { heading: 'All Transactions' } %>
+<%= render partial: 'shared/heading', locals: { heading: 'Transactions' } %>
 
 <%= search_form_for @q, url: user_category_transactions_path(@user_category) do |f| %>
   <%= f.label :payee_name_or_payer_name_description_cont %>

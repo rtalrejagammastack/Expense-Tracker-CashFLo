@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-around mb-4">
-    <% @transaction_types&.each do |type| %>
+    <% transaction_types.each do |type| %>
       <%= link_to type.name, new_user_category_transaction_path(@user_category, type: type.name), class:"btn btn-primary btn-lg shadow" %>
     <% end %>
 </div>

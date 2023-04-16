@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     get 'users', to: 'devise/registrations#new'
   end
   
-  resources :home, only: [:index]
+  resources :home, only: %i[index]
   resources :user_categories, param: :slug do
     resources :expense_categories, param: :slug do
       resources :expense_sub_categories, param: :slug, only: %i[new create edit update destroy]

@@ -21,8 +21,8 @@ require 'faker'
   payer_name = "Fake"
   payee_name = Faker::Name.name
   category = 26
-  expense_sub_category = Faker::Number.between(from: 21, to: 27)
-  status = Faker::Number.between(from: 9, to: 10)
+  expense_sub_category = Faker::Number.between(from: 30, to: 31)
+  status = Faker::Number.between(from: 11, to: 12)
   type = Faker::Number.between(from: 5, to: 6)
   mode = Faker::Number.between(from: 9, to: 12)
   created_at = Faker::Date.between(from: 1.year.ago, to: Date.today)
